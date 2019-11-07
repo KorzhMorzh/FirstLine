@@ -129,13 +129,38 @@ namespace NotebookApp
 
         public string Birthday
         {
-            get => _birthday.ToString();
+            get
+            {
+                if (_birthday == DateTime.MinValue)
+                {
+                    return "не указана";
+                }
+
+                return _birthday.ToString();
+            }
             set
             {
-                if (!DateTime.TryParse(value, out _birthday))
+                while (true)
                 {
-                    _birthday = new DateTime(1, 1, 1);
+                    if (!DateTime.TryParse(value, out _birthday))
+                    {
+                        if (value == "") 
+                        {
+                            _birthday = new DateTime(1, 1, 1);
+                            break;
+                        }
+
+                        Console.WriteLine("Вы ввели неккоректную дату. " +
+                                          "Попробуйте ввести в формате ДД.ММ.ГГГГ\n" +
+                                          "Если желаете оставить поле пустым, нажмите enter");
+                        value = Console.ReadLine();
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
+
             }
         }
 
