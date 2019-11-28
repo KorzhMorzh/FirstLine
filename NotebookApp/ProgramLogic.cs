@@ -55,7 +55,7 @@ namespace NotebookApp
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine("Неверно выбрана команда. Попробуйте еще раз");
+                        Console.WriteLine("Неверно выбрана команда. Попробуйте еще раз\n");
                         break;
                 }
             }
