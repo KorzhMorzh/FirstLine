@@ -8,23 +8,20 @@ namespace Coursework.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult About()
+        [HttpPost]
+        public ActionResult Send(string text, string key, string isEnCoded)
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            ViewBag.Result = new Models.Vigener(text, key, isEnCoded).NewText;
+            ViewBag.Text = text;
+            ViewBag.Key = key;
+            ViewBag.IsEncoded = isEnCoded;
+            return View("Index");
         }
     }
 }
