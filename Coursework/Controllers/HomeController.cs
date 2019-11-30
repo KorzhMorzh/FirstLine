@@ -8,19 +8,18 @@ namespace Coursework.Controllers
 {
     public class HomeController : Controller
     {
-        [HttpGet]
         public ActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Send(string text, string key, string isEnCoded)
+        public ActionResult Send(string text, string key, string isEncrypted)
         {
-            ViewBag.Result = new Models.Vigener(text, key, isEnCoded).NewText;
+            ViewBag.Result = new Models.Vigener(text, key, isEncrypted).NewText;
             ViewBag.Text = text;
             ViewBag.Key = key;
-            ViewBag.IsEncoded = isEnCoded;
+            ViewBag.IsEncrypted = isEncrypted;
             return View("Index");
         }
     }

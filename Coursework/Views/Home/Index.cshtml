@@ -18,37 +18,37 @@
                         <div class="row" style="width: auto">
                             <div class="col-lg-6" style="margin-top: 5px">
                                 <label class="">Text</label>
-                                <textarea class="form-control rounded-0 mb-3" name="Text"rows="10"cols="10" maxlength="20000">@ViewBag.text ></textarea>
+                                <textarea class="form-control rounded-0 mb-3" name="Text" required rows="10" 
+                                          cols="10" maxlength="20000" placeholder="Enter the text">@ViewBag.text</textarea>
                             </div>
                             <div class="col-lg-3 align-content-center">
                                 <div style="margin-top: 5px">
                                     <label class="">Key</label>
-                                    <input name="Key" class="form-control" value="@ViewBag.key"/>
+                                    <input name="Key" class="form-control" placeholder="Enter the key"
+                                           value="@ViewBag.key" pattern="^[А-Яа-яЁё]+$" oninput="this.setCustomValidity('')"
+                                           oninvalid="this.setCustomValidity('The key must contain only Russian letters and consist of one word')" required/>
                                 </div>
                                 <div>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" name="IsEncoded" value="true" type="radio" checked="checked">Decode
+                                            <input class="form-check-input" name="IsEncrypted" value="true" type="radio" checked="checked">Decode
                                         </label>
                                     </div>
                                     <div class="form-check">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" name="IsEncoded" value="false" type="radio">Encode
+                                            <input class="form-check-input" name="IsEncrypted" value="false" type="radio">Encode
                                         </label>
                                     </div>
-
                                 </div>
                                 <div>
                                     <input type="submit" class="btn btn-secondary" value="Compute"/>
                                 </div>
                             </div>
                         </div>
-                        <div class="row" style="margin-top: 5px">
-                            <label>Result</label>
+                        <label>Result</label>
+                        <div style="margin-top: 5px">
                             <div name="Result" style="min-height: 300px">
-                                <div>
-                                    <span style="white-space: pre-line">@ViewBag.result</span>
-                                </div>
+                                <span style="white-space: pre-line">@ViewBag.result</span>
                             </div>
                         </div>
                     }
