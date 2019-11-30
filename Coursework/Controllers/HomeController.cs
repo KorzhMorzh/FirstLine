@@ -16,7 +16,7 @@ namespace Coursework.Controllers
         [HttpPost]
         public ActionResult Send(string text, string key, string isEncrypted)
         {
-            ViewBag.Result = new Models.Vigener(text, key, isEncrypted).NewText;
+            ViewBag.Result = new Custom_Classes.Vigener(text, key, isEncrypted).NewText;
             ViewBag.Text = text;
             ViewBag.Key = key;
             ViewBag.IsEncrypted = isEncrypted;
