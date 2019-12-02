@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
+using Coursework.Custom_Classes;
 
 namespace Coursework.Controllers
 {
     public class HomeController : Controller
     {
+        
         public ActionResult Index()
         {
             return View();
@@ -16,11 +15,30 @@ namespace Coursework.Controllers
         [HttpPost]
         public ActionResult Send(string text, string key, string isEncrypted)
         {
-            ViewBag.Result = new Custom_Classes.Vigener(text, key, isEncrypted).NewText;
+            ViewBag.Result = new Vigener(text, key, isEncrypted).NewText;
             ViewBag.Text = text;
             ViewBag.Key = key;
             ViewBag.IsEncrypted = isEncrypted;
             return View("Index");
+        }
+
+        
+
+
+        [HttpPost]
+        public FileResult Upload(HttpPostedFileBase upload, string key, string isEncrypted, string FileName)
+        {
+            if (upload != null)
+            {
+                var docFile = new FileHandler(upload);
+                var byteFile = docFile.Cipher(key, isEncrypted);
+                string fileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+                string fileName = FileName == "" ? docFile.OriginalFileName : FileName + ".docx";
+                return File(byteFile, fileType, fileName);
+
+            }
+
+            return ViewBag.Error;
         }
     }
 }

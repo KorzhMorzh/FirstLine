@@ -24,6 +24,20 @@
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
+<script>
+    $(function () {
+        $('[data-toggle="pill"]').on('shown.bs.tab', function () {
+            localStorage.setItem('lastTab', $(this).attr('href'));
+        });
+        var lastTab = localStorage.getItem('lastTab');
+        if (lastTab) {
+            $('[href="' + lastTab + '"]').tab('show');
+        }
+        else {
+            $('[data-toggle="pill"]:first').tab('show');
+        }
+    });
+</script>
 @RenderSection("scripts", required: false)
 </body>
 </html>
