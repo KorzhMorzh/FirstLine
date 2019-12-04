@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using Coursework.Custom_Classes;
 
@@ -6,7 +7,6 @@ namespace Coursework.Controllers
 {
     public class HomeController : Controller
     {
-        
         public ActionResult Index()
         {
             return View();
@@ -22,10 +22,8 @@ namespace Coursework.Controllers
             return View("Index");
         }
 
-        
-
-
         [HttpPost]
+        [HandleError(ExceptionType = typeof(System.IO.FileFormatException), View = "~/Error/CustomError")]
         public FileResult Upload(HttpPostedFileBase upload, string key, string isEncrypted, string FileName)
         {
             if (upload != null)
@@ -35,10 +33,9 @@ namespace Coursework.Controllers
                 string fileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
                 string fileName = FileName == "" ? docFile.OriginalFileName : FileName + ".docx";
                 return File(byteFile, fileType, fileName);
-
             }
 
-            return ViewBag.Error;
+            return null;
         }
     }
 }
