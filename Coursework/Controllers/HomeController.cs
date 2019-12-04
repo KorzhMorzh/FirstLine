@@ -13,7 +13,7 @@ namespace Coursework.Controllers
         }
 
         [HttpPost]
-        public ActionResult Send(string text, string key, string isEncrypted)
+        public ActionResult Compute(string text, string key, string isEncrypted)
         {
             ViewBag.Result = new Vigener(text, key, isEncrypted).NewText;
             ViewBag.Text = text;
@@ -23,19 +23,25 @@ namespace Coursework.Controllers
         }
 
         [HttpPost]
-        [HandleError(ExceptionType = typeof(System.IO.FileFormatException), View = "~/Error/CustomError")]
+        [HandleError(ExceptionType = typeof(System.IO.FileFormatException), View = "~/Error/WrongRequest")]
         public FileResult Upload(HttpPostedFileBase upload, string key, string isEncrypted, string FileName)
         {
+            string fileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
             if (upload != null)
             {
                 var docFile = new FileHandler(upload);
                 var byteFile = docFile.Cipher(key, isEncrypted);
-                string fileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
-                string fileName = FileName == "" ? docFile.OriginalFileName : FileName + ".docx";
+                var fileName = FileName == "" ? docFile.OriginalFileName : FileName + ".docx";
                 return File(byteFile, fileType, fileName);
             }
 
-            return null;
+            throw new HttpException(500,"Файл осутствует");
+        }
+
+        public FileResult Download(string result)
+        {
+            var fileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+            return File(new FileGenerator(result).ByteArray, fileType, "CipherVigenere.docx");
         }
     }
 }

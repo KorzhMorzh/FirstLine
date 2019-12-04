@@ -20,11 +20,3 @@
 
 input,
 select { max-width: 280px; }
-
-input:invalid {
-    border-color: red;
-}
-input,
-input:valid {
-    border-color: #ccc;
-}

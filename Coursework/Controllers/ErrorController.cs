@@ -19,9 +19,10 @@ namespace Coursework.Controllers
             return View();
         }
 
-        public ActionResult CustomError()
+        public ActionResult WrongRequest()
         {
             return View();
         }
+        
     }
 }
