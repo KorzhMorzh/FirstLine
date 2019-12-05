@@ -140,7 +140,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Custom_Classes\FileGenerator.cs" />
     <Compile Include="Custom_Classes\FileHandler.cs" />
-    <Compile Include="Custom_Classes\Vigener.cs" />
+    <Compile Include="Custom_Classes\VigenereCipher.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

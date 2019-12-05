@@ -9,13 +9,13 @@ namespace Coursework.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         [HttpPost]
         public ActionResult Compute(string text, string key, string isEncrypted)
         {
-            ViewBag.Result = new Vigener(text, key, isEncrypted).NewText;
+            ViewBag.Result = new VigenereCipher(text, key, isEncrypted).NewText;
             ViewBag.Text = text;
             ViewBag.Key = key;
             ViewBag.IsEncrypted = isEncrypted;
@@ -31,11 +31,11 @@ namespace Coursework.Controllers
             {
                 var docFile = new FileHandler(upload);
                 var byteFile = docFile.Cipher(key, isEncrypted);
-                var fileName = FileName == "" ? docFile.OriginalFileName : FileName + ".docx";
+                var fileName = FileName == "" ? docFile.OriginalFileName + ".docx" : FileName + ".docx";
                 return File(byteFile, fileType, fileName);
             }
 
-            throw new HttpException(500,"Файл осутствует");
+            throw new HttpException(500,"File does not exist");
         }
 
         public FileResult Download(string result)

@@ -12,7 +12,7 @@ namespace Coursework.Custom_Classes
         public FileHandler(HttpPostedFileBase upload)
         {
             UploadedDocument = upload;
-            OriginalFileName = upload.FileName;
+            OriginalFileName = upload.FileName.Replace(".docx","");
         }
 
         public string ParseDocument(WordprocessingDocument wordDoc)
@@ -34,7 +34,7 @@ namespace Coursework.Custom_Classes
                 stream.Position = 0;
                 using (var wordDoc = WordprocessingDocument.Open(stream, true))
                 {
-                    var newDocText = new Vigener(ParseDocument(wordDoc), key, isEncrypted).NewText;
+                    var newDocText = new VigenereCipher(ParseDocument(wordDoc), key, isEncrypted).NewText;
 
                     using (StreamWriter sw = new StreamWriter(wordDoc.MainDocumentPart.GetStream(FileMode.Create)))
                     {

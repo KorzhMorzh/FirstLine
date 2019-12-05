@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Coursework.Custom_Classes
 {
-    public class Vigener
+    public class VigenereCipher
     {
         private readonly ArrayList _alphabetLower = new ArrayList
         {
@@ -17,9 +17,9 @@ namespace Coursework.Custom_Classes
         };
         public string NewText { get; }
 
-        public Vigener(string text, string key, string isEncrypted)
+        public VigenereCipher(string text, string key, string isEncrypted)
         {
-            NewText = isEncrypted == "true" ? Decrypt(text, key) : Encrypt(text, key);
+            NewText = isEncrypted == "true" ? Encrypt(text, key) : Decrypt(text, key);
         }
 
         private string Encrypt(string text, string key)
