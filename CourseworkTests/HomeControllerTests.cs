@@ -35,7 +35,7 @@ namespace CourseworkTests
                 controllerContextMock.SetupGet(con => con.HttpContext)
                     .Returns(contextMock.Object);
                 homeController.ControllerContext = controllerContextMock.Object;
-                var result = homeController.Upload(fileMock.Object, "скорпион", "false", "");
+                var result = homeController.Upload(fileMock.Object, "скорпион", "true", "");
                 var fileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
                 Assert.AreEqual(fileType, (result.ContentType));
                 Assert.AreEqual("TestUpload.docx", result.FileDownloadName);
@@ -57,7 +57,7 @@ namespace CourseworkTests
                 controllerContextMock.SetupGet(con => con.HttpContext)
                     .Returns(contextMock.Object);
                 homeController.ControllerContext = controllerContextMock.Object;
-                var result = homeController.Upload(fileMock.Object, "скорпион", "false", "NewFile");
+                var result = homeController.Upload(fileMock.Object, "скорпион", "true", "NewFile");
                 var fileType = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
                 Assert.AreEqual(fileType, (result.ContentType));
                 Assert.AreEqual("NewFile.docx", result.FileDownloadName);
@@ -80,7 +80,7 @@ namespace CourseworkTests
                     .Returns(contextMock.Object);
                 homeController.ControllerContext = controllerContextMock.Object;
                 Assert.ThrowsException<OpenXmlPackageException>(() =>
-                    homeController.Upload(fileMock.Object, "скорпион", "false", ""));
+                    homeController.Upload(fileMock.Object, "скорпион", "true", ""));
             }
         }
 
@@ -89,7 +89,7 @@ namespace CourseworkTests
         {
             HomeController homeController = new HomeController();
             Assert.ThrowsException<HttpException>(() =>
-                homeController.Upload(null, "скорпион", "false", ""));
+                homeController.Upload(null, "скорпион", "true", ""));
         }
 
         [TestMethod]
@@ -105,7 +105,7 @@ namespace CourseworkTests
         public void CalculateReturnIndex()
         {
             HomeController homeController = new HomeController();
-            var result = homeController.Calculate("поздравляю", "скорпион", "false");
+            var result = homeController.Calculate("поздравляю", "скорпион", "true");
             Assert.AreEqual("Index", ((ViewResult)result).ViewName);
         }
 
@@ -113,7 +113,7 @@ namespace CourseworkTests
         public void CalculateSetsViewBag()
         {
             HomeController homeController = new HomeController();
-            var result = homeController.Calculate("поздравляю", "скорпион", "true");
+            var result = homeController.Calculate("поздравляю", "скорпион", "false");
             Assert.AreEqual("бщцфаирщри", ((ViewResult)result).ViewData["Result"]);
             Assert.AreEqual("скорпион", ((ViewResult)result).ViewData["Key"]);
         }

@@ -19,7 +19,7 @@ namespace Coursework.Custom_Classes
 
         public VigenereCipher(string text, string key, string isEncrypted)
         {
-            NewText = isEncrypted == "true" ? Encrypt(text, key) : Decrypt(text, key);
+            NewText = isEncrypted == "false" ? Encrypt(text, key) : Decrypt(text, key);
         }
 
         private string Encrypt(string text, string key)
