@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Coursework.Custom_Classes;
 
 namespace CourseworkTests
@@ -49,7 +48,7 @@ namespace CourseworkTests
         }
 
         [TestMethod]
-        public void EncryptIgnoreUpperLetterInKey()
+        public void EncryptIgnoresUpperLetterInKey()
         {
             var wordToEncrypt = "поздравляю";
             var key = "сКоРПиоН";
@@ -99,13 +98,23 @@ namespace CourseworkTests
         }
 
         [TestMethod]
-        public void DecryptIgnoreUpperLetterInKey()
+        public void DecryptIgnoresUpperLetterInKey()
         {
             var wordToDecrypt = "бщцфаирщри";
             var key = "сКоРПиоН";
             var isEncrypted = "false";
             var result = "поздравляю";
             Assert.AreEqual(result, new VigenereCipher(wordToDecrypt, key, isEncrypted).NewText);
+        }
+
+        [TestMethod]
+        public void CorrectEncryptAndThenDecrypt()
+        {
+            var wordToEncrypt = "поздравляю";
+            var key = "сКоРПиоН";
+            var encryptedWord = new VigenereCipher(wordToEncrypt,key,"true").NewText;
+            var decryptedWord = new VigenereCipher(encryptedWord,key,"false").NewText;
+            Assert.AreEqual(wordToEncrypt, decryptedWord);
         }
     }
 }

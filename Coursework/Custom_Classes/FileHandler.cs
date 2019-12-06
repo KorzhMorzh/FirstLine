@@ -15,7 +15,7 @@ namespace Coursework.Custom_Classes
             OriginalFileName = upload.FileName.Replace(".docx","");
         }
 
-        public string ParseDocument(WordprocessingDocument wordDoc)
+        private string ParseDocument(WordprocessingDocument wordDoc)
         {
             string docText;
             using (StreamReader sr = new StreamReader(wordDoc.MainDocumentPart.GetStream()))
@@ -48,7 +48,7 @@ namespace Coursework.Custom_Classes
             return byteArray;
         }
 
-        public void CopyInputStreamToStream(Stream destination)
+        private void CopyInputStreamToStream(Stream destination)
         {
             byte[] buffer = new byte[32768];
             int bytesRead;

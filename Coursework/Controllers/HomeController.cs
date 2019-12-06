@@ -13,12 +13,11 @@ namespace Coursework.Controllers
         }
 
         [HttpPost]
-        public ActionResult Compute(string text, string key, string isEncrypted)
+        public ActionResult Calculate(string text, string key, string isEncrypted)
         {
             ViewBag.Result = new VigenereCipher(text, key, isEncrypted).NewText;
             ViewBag.Text = text;
             ViewBag.Key = key;
-            ViewBag.IsEncrypted = isEncrypted;
             return View("Index");
         }
 
