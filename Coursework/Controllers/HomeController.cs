@@ -15,7 +15,15 @@ namespace Coursework.Controllers
         [HttpPost]
         public ActionResult Calculate(string text, string key, string isEncrypted)
         {
-            ViewBag.Result = new VigenereCipher(text, key, isEncrypted).NewText;
+            try
+            {
+                ViewBag.Result = new VigenereCipher(text, key, isEncrypted).NewText;
+            }
+            catch
+            {
+                ViewBag.Result = "Error. Invalid key";
+            }
+
             ViewBag.Text = text;
             ViewBag.Key = key;
             return View("Index");
@@ -34,7 +42,7 @@ namespace Coursework.Controllers
                 return File(byteFile, fileType, fileName);
             }
 
-            throw new HttpException(500,"File does not exist");
+            throw new HttpException(500, "File does not exist");
         }
 
         public FileResult Download(string result)

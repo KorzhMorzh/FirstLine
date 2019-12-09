@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Text;
 
 namespace Coursework.Custom_Classes
@@ -29,16 +30,18 @@ namespace Coursework.Custom_Classes
 
             for (int i = 0; i < text.Length; i++)
             {
-                var indexofKey = _alphabetLower.IndexOf(key.ToLower()[(i - j) % key.Length]);
+                if (key.Length == 0) throw new Exception("Invalid key");
+                var indexOfKey = _alphabetLower.IndexOf(key.ToLower()[(i - j) % key.Length]);
+                if (indexOfKey == -1) throw new Exception("Invalid key");
                 if (_alphabetLower.Contains(text[i]))
                 {
-                    var indexofText = _alphabetLower.IndexOf(text[i]);
-                    newText.Append(_alphabetLower[(indexofText + indexofKey) % 33]);
+                    var indexOfText = _alphabetLower.IndexOf(text[i]);
+                    newText.Append(_alphabetLower[(indexOfText + indexOfKey) % 33]);
                 }
                 else if (_alphabetUpper.Contains(text[i]))
                 {
-                    var indexofText = _alphabetUpper.IndexOf(text[i]);
-                    newText.Append(_alphabetUpper[(indexofText + indexofKey) % 33]);
+                    var indexOfText = _alphabetUpper.IndexOf(text[i]);
+                    newText.Append(_alphabetUpper[(indexOfText + indexOfKey) % 33]);
                 }
                 else
                 {
@@ -59,16 +62,18 @@ namespace Coursework.Custom_Classes
 
             for (int i = 0; i < text.Length; i++)
             {
-                var indexofKey = _alphabetLower.IndexOf(key.ToLower()[(i - j) % key.Length]);
+                if (key.Length == 0) throw new Exception("Invalid key");
+                var indexOfKey = _alphabetLower.IndexOf(key.ToLower()[(i - j) % key.Length]);
+                if (indexOfKey == -1) throw new Exception("Invalid key");
                 if (_alphabetLower.Contains(text[i]))
                 {
-                    var indexofText = _alphabetLower.IndexOf(text[i]);
-                    newText.Append(_alphabetLower[(33 + indexofText - indexofKey) % 33]);
+                    var indexOfText = _alphabetLower.IndexOf(text[i]);
+                    newText.Append(_alphabetLower[(33 + indexOfText - indexOfKey) % 33]);
                 }
                 else if (_alphabetUpper.Contains(text[i]))
                 {
-                    var indexofText = _alphabetUpper.IndexOf(text[i]);
-                    newText.Append(_alphabetUpper[(33 + indexofText - indexofKey) % 33]);
+                    var indexOfText = _alphabetUpper.IndexOf(text[i]);
+                    newText.Append(_alphabetUpper[(33 + indexOfText - indexOfKey) % 33]);
                 }
                 else
                 {

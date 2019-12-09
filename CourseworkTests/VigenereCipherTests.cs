@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Coursework.Custom_Classes;
 
 namespace CourseworkTests
@@ -58,6 +59,24 @@ namespace CourseworkTests
         }
 
         [TestMethod]
+        public void EncryptThrowsExceptionWhenKeyIsEmpty()
+        {
+            var wordToEncrypt = "поздравляю";
+            var key = "";
+            var isEncrypted = "false";
+            Assert.ThrowsException<Exception>(() =>new VigenereCipher(wordToEncrypt, key, isEncrypted));
+        }
+
+        [TestMethod]
+        public void EncryptThrowsExceptionWhenKeyContainsNonRussianSymbols()
+        {
+            var wordToEncrypt = "поздравляю";
+            var key = "asd";
+            var isEncrypted = "false";
+            Assert.ThrowsException<Exception>(() => new VigenereCipher(wordToEncrypt, key, isEncrypted));
+        }
+
+        [TestMethod]
         public void DecryptLowerRussianLetter()
         {
             var wordToDecrypt = "бщцфаирщри";
@@ -105,6 +124,24 @@ namespace CourseworkTests
             var isEncrypted = "true";
             var result = "поздравляю";
             Assert.AreEqual(result, new VigenereCipher(wordToDecrypt, key, isEncrypted).NewText);
+        }
+
+        [TestMethod]
+        public void DecryptThrowsExceptionWhenKeyIsEmpty()
+        {
+            var wordToEncrypt = "поздравляю";
+            var key = "";
+            var isEncrypted = "true";
+            Assert.ThrowsException<Exception>(() => new VigenereCipher(wordToEncrypt, key, isEncrypted));
+        }
+
+        [TestMethod]
+        public void DecryptThrowsExceptionWhenKeyContainsNonRussianSymbols()
+        {
+            var wordToEncrypt = "поздравляю";
+            var key = "asd";
+            var isEncrypted = "true";
+            Assert.ThrowsException<Exception>(() => new VigenereCipher(wordToEncrypt, key, isEncrypted));
         }
 
         [TestMethod]
